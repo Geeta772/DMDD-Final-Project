@@ -6,6 +6,7 @@ import AddShipment from './components/addShipment';
 import AddSupplier from './components/addSupplier';
 import AddWarehouse from './components/addWarehouse';
 import './App.css';
+<div className="App" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/background.jpg)`, backgroundSize: 'cover', minHeight: '100vh' }}></div>
 import Header from './components/header';
 // import AddProduct from './components/addProduct';
 

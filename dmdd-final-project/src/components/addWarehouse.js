@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './AddWarehouseStyles.css'; // Import the updated CSS file
 
 const AddWarehouse = () => {
   const [formData, setFormData] = useState({
     WarehouseID: '',
+    Name: '',
     Location: '',
-    Address: '',
-    City: '',
-    Country: '',
+    Capacity: '',
+    Description: '',
   });
 
   const handleChange = (e) => {
@@ -17,17 +18,15 @@ const AddWarehouse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post('http://localhost:2507/api/warehouses', formData);
       console.log('Warehouse created:', response.data);
-      // Reset form after successful submission
       setFormData({
         WarehouseID: '',
+        Name: '',
         Location: '',
-        Address: '',
-        City: '',
-        Country: '',
+        Capacity: '',
+        Description: '',
       });
       alert('Warehouse added successfully!');
     } catch (error) {
@@ -37,72 +36,76 @@ const AddWarehouse = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', margin: '50px 0' }}>
-      <section style={{ width: '400px', border: '1px solid #ccc', padding: '20px', borderRadius: '5px' }}>
-        <h3 style={{ marginBottom: '20px', textAlign: 'center' }}>Add Warehouse</h3>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <label htmlFor="warehouseID" style={{ minWidth: '120px' }}>Warehouse ID</label>
+    <div className="form-container">
+      <section className="form-section">
+        <h3 className="form-title">Add Warehouse</h3>
+        <form onSubmit={handleSubmit} className="form-layout">
+          <div className="form-row">
             <input
               type="text"
+              className="form-control"
               id="warehouseID"
               name="WarehouseID"
+              placeholder="Warehouse ID"
               value={formData.WarehouseID}
               onChange={handleChange}
               required
-              style={{ flex: '1', marginLeft: '10px' }}
             />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <label htmlFor="location" style={{ minWidth: '120px' }}>Location</label>
+
+          <div className="form-row">
             <input
               type="text"
+              className="form-control"
+              id="name"
+              name="Name"
+              placeholder="Name"
+              value={formData.Name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-row">
+            <input
+              type="text"
+              className="form-control"
               id="location"
               name="Location"
+              placeholder="Location"
               value={formData.Location}
               onChange={handleChange}
               required
-              style={{ flex: '1', marginLeft: '10px' }}
             />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <label htmlFor="address" style={{ minWidth: '120px' }}>Address</label>
+
+          <div className="form-row">
             <input
-              type="text"
-              id="address"
-              name="Address"
-              value={formData.Address}
+              type="number"
+              className="form-control"
+              id="capacity"
+              name="Capacity"
+              placeholder="Capacity"
+              value={formData.Capacity}
               onChange={handleChange}
               required
-              style={{ flex: '1', marginLeft: '10px' }}
             />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <label htmlFor="city" style={{ minWidth: '120px' }}>City</label>
-            <input
-              type="text"
-              id="city"
-              name="City"
-              value={formData.City}
+
+          <div className="form-row">
+            <textarea
+              className="form-control"
+              id="description"
+              name="Description"
+              placeholder="Description"
+              value={formData.Description}
               onChange={handleChange}
               required
-              style={{ flex: '1', marginLeft: '10px' }}
             />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <label htmlFor="country" style={{ minWidth: '120px' }}>Country</label>
-            <input
-              type="text"
-              id="country"
-              name="Country"
-              value={formData.Country}
-              onChange={handleChange}
-              required
-              style={{ flex: '1', marginLeft: '10px' }}
-            />
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-            <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+
+          <div className="form-submit">
+            <button type="submit" className="btn-primary">
               Add Warehouse
             </button>
           </div>
